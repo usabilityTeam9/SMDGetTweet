@@ -1,16 +1,20 @@
 import urllib
 from requests_oauthlib import OAuth1
+from dotenv import load_dotenv
 import requests
 import sys
 import csv
+import os
+load_dotenv()
 
 def main():
 
+
     # APIの秘密鍵
-    CK = 'TiLR1dCCI3P6W9FZXuKOpYo85' # コンシューマーキー
-    CKS = '7dY9l8TjARZJlaNr6oztADub0ntTI4x2B69TaEO6S3IgNMwu47' # コンシューマーシークレット
-    AT = '1272371880595296256-yvhaFuYEl1gq5zy1K8I4nQlZTU2Z7A' # アクセストークン
-    ATS = '0N9zXh9iZEakRI2lKKIK9h6a3KnjoxVcYXY4rY5drJ5cl' # アクセストークンシークレット
+    CK = os.getenv('CK') # コンシューマーキー
+    CKS = os.getenv('CKS') # コンシューマーシークレット
+    AT = os.getenv('AT') # アクセストークン
+    ATS = os.getenv('ATS') # アクセストークンシークレット
 
     # 検索時のパラメーター
     word = '(#SHIBUYAMELTDOWN)' # 検索ワード ※ ()に囲むとハッシュタグ検索になる
