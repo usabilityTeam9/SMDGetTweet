@@ -39,10 +39,13 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
         if($value['place'] != null){
             ?>
             <div id="map"></div>
+            <script>
+                let latStr = <?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']; ?>;
+                let lngStr = <?php print $value['place']['bounding_box']['coordinates']['0']['0']['0']; ?>;
+            </script>
             <?php
-            //print_r($value['place']['bounding_box']['coordinates']['0']['0']['1']).'<br>';
-            print_r($value['place']);
-            print '<br>';
+            // print_r($value['place']['bounding_box']['coordinates']['0']['0']['1']).'<br>';
+            print $value['text'].'<br>';
         }
 
     }
