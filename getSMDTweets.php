@@ -35,17 +35,23 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
     $result = $connection->get('search/tweets', array("q" => "(#AITMELTDOWN)", "count" => 50))->statuses;
     $tweets = json_decode(json_encode($result), true);
 
+    ?>
+    <div id="map"></div>
+    <script>
+        var latStr = [];
+        var lngStr = [];
+    </script>
+    <?php
     foreach ($tweets as $value) {
         if($value['place'] != null){
+            print $value['text'].'<br>';
             ?>
-            <div id="map"></div>
             <script>
-                let latStr = <?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']; ?>;
-                let lngStr = <?php print $value['place']['bounding_box']['coordinates']['0']['0']['0']; ?>;
+                latStr.push(<?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']?>);
+                lngStr.push(<?php print $value['place']['bounding_box']['coordinates']['0']['0']['0']?>);
             </script>
             <?php
             // print_r($value['place']['bounding_box']['coordinates']['0']['0']['1']).'<br>';
-            print $value['text'].'<br>';
         }
 
     }
