@@ -1,33 +1,25 @@
 let map;
-var center = { lat: 35.183961197271, lng: 137.11132629433  };
-var marker = [];
-var infoWindow = [];
+var center = { lat: 35.183961197271, lng: 137.11132629433  }; //中心は愛知工業大学
+var marker = []; //マーカーの配列
 
-var pinLat = [];
-var pinLng = [];
+var pinLat = []; //float型の緯度
+var pinLng = []; //float型の経度
 
 function initMap() {
-    infoWindow = [];
 
+    //緯度情報を全てstring->floatにする
     latStr.forEach(val => {
-        pinLat.push(parseFloat(val))
+        pinLat.push(parseFloat(val));
     });
+    //経度情報を全てstring->floatにする
     lngStr.forEach(val => {
-        pinLng.push(parseFloat(val))
+        pinLng.push(parseFloat(val));
     });
 
-    latStr.forEach(val => {
-        console.log(val);
-        console.log(typeof(val));
-    });
-    lngStr.forEach(val => {
-        console.log(val);
-        console.log(typeof(val));
-    });
-
+    //マップのインスタンスを生成　中心は愛工大　倍率は8倍(大体愛知県が見えるくらい)
     map = new google.maps.Map(document.getElementById("map"), {
-    center: center,
-    zoom: 8,
+        center: center,
+        zoom: 8,
     });
 
     // マーカー毎の処理
@@ -39,7 +31,7 @@ function initMap() {
         });
 
         infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
-            content: '<div class="sample">test</div>' // 吹き出しに表示する内容
+            content: windowText[i] // 吹き出しに表示する内容
         });
 
         markerEvent(i); // マーカーにクリックイベントを追加
