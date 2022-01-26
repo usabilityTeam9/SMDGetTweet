@@ -40,6 +40,6 @@ function initMap() {
 
 function markerEvent(i) {
     marker[i].addListener('click', function() { // マーカーをクリックしたとき
-      infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+        infoWindow[i].open(map, marker[i]); // 吹き出しの表示
     });
 }

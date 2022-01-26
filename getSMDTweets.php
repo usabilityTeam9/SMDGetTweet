@@ -47,7 +47,13 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
     <?php
     foreach ($tweets as $value) {
         if($value['place'] != null){    //場所情報が書かれていればマップに表示
-            $windowTextHTML .= '<h2>'.$value["text"].'<br>"';   //h2タグでツイート本文を表示
+            $windowTextHTML .= '<div style="display: flex;" id=userInfo>';
+            $windowTextHTML .= '<div id="icon"><img src="'.$value["user"]["profile_image_url"].'"></div>';
+            $windowTextHTML .= '<h2 id="name">'.$value["user"]["name"].'</h2>';
+            $windowTextHTML .= '<div id="screenName">@'.$value["user"]["screen_name"].'</div>';
+            $windowTextHTML .= '</div>';
+            $windowTextHTML .= '<h4 id="text">'.$value["text"].'</h4><br>';   //h4タグでツイート本文を表示
+            $windowTextHTML .= '<a href="https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'" target="_blank" rel="noopener noreferrer">https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'</a><br>';
             ?>
             <script>
                 latStr.push(<?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']?>);   //ツイートした緯度を配列に追加
