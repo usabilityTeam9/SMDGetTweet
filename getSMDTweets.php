@@ -24,10 +24,20 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"/> <!-- 標準のスタイルをリセット -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kosugi+Maru&display=swap" rel="stylesheet"> 
     <script src="https://maps.googleapis.com/maps/api/js?key=<?php print $MAPCK ?>&callback=initMap" async defer></script>
-    <title>SHIBUYAMELTDOWNピンたて</title>
+    <title>AITMELTDOWNピンたて</title>
 </head>
 <body>
+    <header><h1 id="title">AITMELTDOWN</h1></header>
+
     <?php
 
     $connection = new TwitterOAuth($CK, $CKS, $AT, $ATS);   //TwitterAPI接続のためのインスタンス生成
@@ -48,12 +58,14 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
     foreach ($tweets as $value) {
         if($value['place'] != null){    //場所情報が書かれていればマップに表示
             $windowTextHTML .= '<div style="display: flex;" id=userInfo>';
-            $windowTextHTML .= '<div id="icon"><img src="'.$value["user"]["profile_image_url"].'"></div>';
-            $windowTextHTML .= '<h2 id="name">'.$value["user"]["name"].'</h2>';
-            $windowTextHTML .= '<div id="screenName">@'.$value["user"]["screen_name"].'</div>';
+            $windowTextHTML .=  '<div id="icon"><a href="https://twitter.com/'.$value["user"]["screen_name"].'"><img src="'.$value["user"]["profile_image_url"].'"></a></div>';
+            $windowTextHTML .=  '<div id="names">';
+            $windowTextHTML .=      '<h2 id="name">'.$value["user"]["name"].'</h2>';
+            $windowTextHTML .=      '<div id="screenName">@'.$value["user"]["screen_name"].'</div>';
+            $windowTextHTML .=  '</div>';
             $windowTextHTML .= '</div>';
-            $windowTextHTML .= '<h4 id="text">'.$value["text"].'</h4><br>';   //h4タグでツイート本文を表示
-            $windowTextHTML .= '<a href="https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'" target="_blank" rel="noopener noreferrer">https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'</a><br>';
+            $windowTextHTML .= '<div id="text">'.$value["text"].'</div><br>';   //ツイート本文を表示
+            $windowTextHTML .= '<u><a id="link" href="https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'" target="_blank" rel="noopener noreferrer">https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'</a></u><br>';
             ?>
             <script>
                 latStr.push(<?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']?>);   //ツイートした緯度を配列に追加
@@ -72,8 +84,24 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
             windowText.push(<?php print json_encode($windowTextHTML); ?>); //吹き出しに表示するHTMLをまとめて配列に追加
         </script>
         <?php
-        $windowTextHTML = '';   //HTMLをリセットして次のツイートに回す
+        $windowTextHTML = '';   //吹き出しの内容をリセットして次のツイートに回す
     }
     ?>
+    <div id="description">
+        <p>AITMELTDOWNは#AITMELTDOWNというハッシュタグと位置情報がついたツイートを自動で取得して位置をマップ上に表示するアプリケーションです。</p><br>
+        <h2 id="sub"> 使い方 </h2>
+        <ol>
+            <li><u><a href="https://twitter.com">Twitter</a></u>にて#AITMELTDOWNと位置情報をつけて投稿</li>
+            <li>このページでピンが立てられていることを確認（ピンをクリックでツイート情報を確認することもできます）</li>
+        </ol>
+    </div>
+    <footer>
+        <ul id="footer-nav">
+            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/usabilityTeam9/SMDGetTweet"><i class="fab fa-github"></i></a></li>
+        </ul>
+        <p><small>&copy; 2022 Usability Team9</small></p>
+    </footer>
 </body>
 </html>

@@ -1,18 +1,113 @@
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-    #map {
-        height: 10%;
-    }
-    
-    /* Optional: Makes the sample page fill the window. */
-    html,
-    body {
+html,
+body {
+    counter-reset: section; 
     height: 100%;
     margin: 0;
     padding: 0;
-    }
+}
 
-    #screenName{
-        color:red;
-    }
-    
+header{
+    background: #949087;
+    text-align: center;
+    padding: 1rem;
+}
+
+ol li::before{
+    counter-increment: section;
+    content: counter(section) ". ";
+}
+
+ol a:hover{
+    color: #949087;
+}
+
+footer{
+    background: #949087;
+    text-align: center;
+    padding: 3rem;
+}
+
+footer ul{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+footer li{
+    margin: 0 12px;
+    list-style: none;
+}
+
+footer a{
+    color: #fff;
+}
+
+footer a:hover{
+    color: #c7c3ba;
+}
+
+footer small{
+    color: #c7c3ba;
+    font-size: .875rem;
+}
+
+#title{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 500%;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+
+#map {
+    height: 100%;
+    margin: 10px;
+    padding: 0px;
+}
+
+#icon{
+    margin: 10px;
+    padding: 0px;
+}
+
+#name{
+    font-size: 150%;
+    margin: 0;
+    padding: 0;
+}
+
+#screenName{
+    color:darkgray;
+}
+
+#names{
+    display: block;
+    margin: 10px;
+    padding: 0px;
+}
+
+#text{
+    margin: 10px;
+    padding: 0px;
+}
+
+#description{
+    margin: 30px;
+    padding: 0px;
+    font-family: 'Kosugi Maru', sans-serif;
+}
+
+#sub{
+    margin: 10px;
+    padding: 0px;
+    font-family: inherit;
+    font-size: 200%;
+}
+
+#link{
+    margin: 10px;
+    padding: 0px;
+}
+#link:hover{
+    color: #949087;
+}
