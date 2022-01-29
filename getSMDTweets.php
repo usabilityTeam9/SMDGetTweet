@@ -65,7 +65,6 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
             $windowTextHTML .=  '</div>';
             $windowTextHTML .= '</div>';
             $windowTextHTML .= '<div id="text">'.$value["text"].'</div><br>';   //ツイート本文を表示
-            $windowTextHTML .= '<u><a id="link" href="https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'" target="_blank" rel="noopener noreferrer">https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'</a></u><br>';
             ?>
             <script>
                 latStr.push(<?php print $value['place']['bounding_box']['coordinates']['0']['0']['1']?>);   //ツイートした緯度を配列に追加
@@ -78,6 +77,7 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
                     $windowTextHTML .= '<img style="width: 200px" src="'.$media["media_url"].'">'; //imgタグで画像を表示
                 }
             }
+            $windowTextHTML .= '<br><u><a id="link" href="https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'" target="_blank" rel="noopener noreferrer">https://twitter.com/'.$value["user"]["screen_name"].'/status/'.$value["id"].'</a></u>';
         }
         ?>
         <script>
@@ -94,6 +94,12 @@ $MAPCK = $_ENV["MAPCK"]; // Google Mapコンシューマーキー
             <li><u><a href="https://twitter.com">Twitter</a></u>にて#AITMELTDOWNと位置情報をつけて投稿</li>
             <li>このページでピンが立てられていることを確認（ピンをクリックでツイート情報を確認することもできます）</li>
         </ol>
+        <br>
+        <h2 id="sub">使用API</h2>
+        <ul>
+            <li><u><a href="https://developer.twitter.com/en">Twitter Developer Platform</a></u></li>
+            <li><u><a href="https://developers.google.com/maps?hl=ja">Google Maps Platform</a></u></li>
+        </ul>
     </div>
     <footer>
         <ul id="footer-nav">

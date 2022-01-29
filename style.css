@@ -21,6 +21,14 @@ ol a:hover{
     color: #949087;
 }
 
+ul li::before{
+    content: "・";
+}
+
+ul a:hover{
+    color: #949087;
+}
+
 footer{
     background: #949087;
     text-align: center;
