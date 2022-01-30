@@ -21,10 +21,6 @@ ol a:hover{
     color: #949087;
 }
 
-ul li::before{
-    content: "・";
-}
-
 ul a:hover{
     color: #949087;
 }
